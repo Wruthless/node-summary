@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    h1 #{title}: #{book.title}
+    p= book.summary
+
+    if book.length
+
+        div(style='margin-left:20px;margin-top:20px')
+
+            h4 Books
+
+            dl
+            each book in book
+                dt
+                    a(href=book.url) #{book.title}
+                dd #{book.summary}
+
+    else
+        p Do you really wish to delete this Book?
+
+        form(method='POST' action='')
+            div.form-group
+                input#bookid.form-control(
+                    type='hidden',
+                    name='bookid',
+                    required='true',
+                    value=book._id
+                )
+
+            button.btn.btn-primary(type='submit') Delete
